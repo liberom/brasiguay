@@ -10,6 +10,8 @@ default: &default
   pool: <%= Rails.application.credentials.database_pool { 5 } %> # ENV.fetch("RAILS_MAX_THREADS")
   username: <%= Rails.application.credentials.database_username { 'postgres' } %> # ENV.fetch('DATABASE_USERNAME')
   password: <%= Rails.application.credentials.database_password { 'postgres' } %> # ENV['DATABASE_PASSWORD']
+  host: <%= Rails.application.credentials.database_host { 'localhost' } %> # ENV.fetch('POSTGRES_HOST')
+  port: <%= Rails.application.credentials.database_port { 5432 } %> # ENV.fetch('POSTGRES_PORT')
 
 development:
   <<: *default
