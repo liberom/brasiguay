@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # defaults to dashboard
   root :to => redirect('/dashboard/dashboard_v1')
 
-  devise_for :users, path_prefix: 'auth', controllers: { registrations: 'users/registrations' }
+  devise_for :users, path_prefix: 'auth', controllers: { registrations: 'users/registrations', sessions:'users/sessions' }
 
   # view routes
   get '/widgets' => 'widgets#index'
