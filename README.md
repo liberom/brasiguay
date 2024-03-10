@@ -14,4 +14,4 @@ Things you may want to cover :
 * Services (job queues, cache servers, search engines, etc.)
 * Deployment instructions
 * ...
-* Install Gems and Dependencies: bundle install
+* Install Gems and Dependencies (rails and node installed > go to project): bundle install && npm install -g gulp-cli && npm install --save-dev gulp
