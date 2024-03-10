@@ -13,9 +13,12 @@ default: &default
   host: <%= Rails.application.credentials.database_host { 'localhost' } %> # ENV.fetch('POSTGRES_HOST')
   port: <%= Rails.application.credentials.database_port { 5432 } %> # ENV.fetch('POSTGRES_PORT')
 
+  # CREATE USER user_name WITH PASSWORD 'user_password' CREATEDB;
+
 development:
   <<: *default
   database: brasiguay_development
+
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
