@@ -1,7 +1,9 @@
 class User < ApplicationRecord
-
-  # has_one :profile
-  # has_one :account
+  has_one :profile
+  has_one :account
+  has_many :articles
+  has_many :favorites, through: [:articles] # , :events, :products, :services, :estates
+  has_many :scores, through: [:articles]
   # has_many :feedbacks
   # has_many :messages
   # has_many :events
