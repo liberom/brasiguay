@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :services
   resources :experiences
   resources :learnings
   resources :feedbacks
