@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Profile:</strong>
+  <%= @learning.profile_id %>
+</p>
+
+<p>
+  <strong>Institution:</strong>
+  <%= @learning.institution %>
+</p>
+
+<p>
+  <strong>Date from:</strong>
+  <%= @learning.date_from %>
+</p>
+
+<p>
+  <strong>Date to:</strong>
+  <%= @learning.date_to %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @learning.description %>
+</p>
+
+<%= link_to 'Edit', edit_learning_path(@learning) %> |
+<%= link_to 'Back', learnings_path %>
