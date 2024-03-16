@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  type: 1
+  modality: 1
+  user_id: 1
+  price: 1.5
+  currency: 1
+  area: 1.5
+
+two:
+  title: MyString
+  type: 1
+  modality: 1
+  user_id: 1
+  price: 1.5
+  currency: 1
+  area: 1.5
