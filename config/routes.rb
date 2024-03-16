@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :images
+  # resources :images
   resources :jobs
   resources :estates
   resources :products
