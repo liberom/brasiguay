@@ -6,6 +6,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'rails', '~> 6.0.0'
 
 gem 'carrierwave'
+
+# gem 'fog-aws'
 # HEROKU doesn't support sqlite3.
 # Comment this gem
 # gem 'sqlite3', '~> 1.4'
