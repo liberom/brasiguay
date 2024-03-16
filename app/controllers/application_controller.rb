@@ -5,4 +5,9 @@ class ApplicationController < ActionController::Base
 
   def dashboard
   end
+
+  def set_current_user
+    @current_user = current_user if user_signed_in?
+  end
+
 end
