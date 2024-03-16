@@ -33,12 +33,12 @@
               <em class="icon-briefcase"></em>
               <span data-localize="sidebar.nav.BUSINESS">Business Center</span>
           </a>
-          <ul id="business" class="sidebar-nav sidebar-subnav collapse <%= 'show' if controller?('business') %>">
+          <ul id="business" class="sidebar-nav sidebar-subnav collapse <%= 'show' if businesses_list.include?(params[:controller]) %>">
               <li class="sidebar-subnav-header">Business</li>
               <!-- Business Center -->
-              <li class="<%= 'active' if controller?('dashboard') && action?('dashboard_v1') %>">
-                  <a href="/dashboard/dashboard_v1" title="Dashboard v1">
-                    <span>Dashboard v1</span>
+              <li class="<%= 'active' if controller?('products') %>">
+                  <a href="/products" title="Products">
+                    <span>Products</span>
                   </a>
               </li>
               <li class="<%= 'active' if controller?('dashboard') && action?('dashboard_v2') %>">
