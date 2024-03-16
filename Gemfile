@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.0'
 
+gem 'carrierwave'
 # HEROKU doesn't support sqlite3.
 # Comment this gem
 # gem 'sqlite3', '~> 1.4'
