@@ -8,11 +8,13 @@ class EstatesController < ApplicationController
 
   # GET /estates/1 or /estates/1.json
   def show
+    @images = @estate.images.all
   end
 
   # GET /estates/new
   def new
     @estate = Estate.new
+    @images = @estate.images.build
   end
 
   # GET /estates/1/edit
@@ -25,6 +27,9 @@ class EstatesController < ApplicationController
 
     respond_to do |format|
       if @estate.save
+        params[:image_attachments]['image'].each do |image|
+          @images = @estate.images.create!(img: image, imageable_type: 'estate', imageable_id: @estate.id)
+        end
         format.html { redirect_to estate_url(@estate), notice: "Estate was successfully created." }
         format.json { render :show, status: :created, location: @estate }
       else
@@ -65,6 +70,15 @@ class EstatesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def estate_params
-      params.require(:estate).permit(:title, :type, :modality, :user_id, :price, :currency, :area)
+      params.require(:estate).permit(
+        :title,
+        :type,
+        :modality,
+        :user_id,
+        :price,
+        :currency,
+        :area,
+        image_attachments: [:img, :imageable_type, :imageable_id, :id]
+      )
     end
 end

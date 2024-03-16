@@ -8,11 +8,13 @@ class ServicesController < ApplicationController
 
   # GET /services/1 or /services/1.json
   def show
+    @images = @service.images.all
   end
 
   # GET /services/new
   def new
     @service = Service.new
+    @images = @service.images.build
   end
 
   # GET /services/1/edit
@@ -25,6 +27,9 @@ class ServicesController < ApplicationController
 
     respond_to do |format|
       if @service.save
+        params[:image_attachments]['image'].each do |image|
+          @images = @service.images.create!(img: image, imageable_type: 'service', imageable_id: @service.id)
+        end
         format.html { redirect_to service_url(@service), notice: "Service was successfully created." }
         format.json { render :show, status: :created, location: @service }
       else
@@ -65,6 +70,12 @@ class ServicesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def service_params
-      params.require(:service).permit(:user_id, :title, :price, :currency)
+      params.require(:service).permit(
+        :user_id,
+        :title,
+        :price,
+        :currency,
+        image_attachments: [:img, :imageable_type, :imageable_id, :id]
+      )
     end
 end

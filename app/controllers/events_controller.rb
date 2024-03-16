@@ -8,11 +8,13 @@ class EventsController < ApplicationController
 
   # GET /events/1 or /events/1.json
   def show
+    @images = @event.images.all
   end
 
   # GET /events/new
   def new
     @event = Event.new
+    @images = @event.images.build
   end
 
   # GET /events/1/edit
@@ -25,6 +27,9 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
+        params[:image_attachments]['image'].each do |image|
+          @images = @event.images.create!(img: image, imageable_type: 'event', imageable_id: @event.id)
+        end
         format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
         format.json { render :show, status: :created, location: @event }
       else
@@ -65,6 +70,10 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:user_id, :name)
+      params.require(:event).permit(
+        :user_id,
+        :name,
+        image_attachments: [:img, :imageable_type, :imageable_id, :id]
+      )
     end
 end

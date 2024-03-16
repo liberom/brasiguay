@@ -4,7 +4,7 @@ class Estate < ApplicationRecord
   has_one :location, as: :locatable
   has_one :favorite, as: :favorable
   has_many :scores, as: :scorable
-  has_many :images
+  has_many :images, as: :imageable
   accepts_nested_attributes_for :images
 
   enum currency: {

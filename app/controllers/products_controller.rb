@@ -8,11 +8,13 @@ class ProductsController < ApplicationController
 
   # GET /products/1 or /products/1.json
   def show
+    @images = @product.images.all
   end
 
   # GET /products/new
   def new
     @product = Product.new
+    @images = @product.images.build
   end
 
   # GET /products/1/edit
@@ -25,6 +27,9 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
+        params[:image_attachments]['image'].each do |image|
+          @images = @product.images.create!(img: image, imageable_type: 'product', imageable_id: @product.id)
+        end
         format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
       else
@@ -65,6 +70,12 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:user_id, :name, :price, :currency)
+      params.require(:product).permit(
+        :user_id,
+        :name,
+        :price,
+        :currency,
+        image_attachments: [:img, :imageable_type, :imageable_id, :id]
+      )
     end
 end
