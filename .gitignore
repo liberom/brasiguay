@@ -17,6 +17,10 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore AI files.
+AGENTS.md
+GEMINI.md
+
 # Ignore uploaded files in development.
 /storage/*
 !/storage/.keep
@@ -26,6 +30,8 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+.env
 
 /public/packs
 /public/packs-test
