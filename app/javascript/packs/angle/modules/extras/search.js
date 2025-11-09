@@ -5,9 +5,9 @@ import $ from 'jquery';
 // Chosen
 // import 'chosen-js/chosen.css';
 import 'chosen-js/chosen.jquery.js';
-// Datetimepicker
-// import 'bootstrap-datepicker/dist/css/bootstrap-datepicker.css';
-import 'bootstrap-datepicker/dist/js/bootstrap-datepicker.js';
+// Datepicker -> Flatpickr
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.css';
 // Range slider
 // import 'bootstrap-slider/dist/css/bootstrap-slider.min.css';
 import 'bootstrap-slider/dist/bootstrap-slider.min.js';
@@ -17,7 +17,7 @@ function initSearch() {
 
     if (!$.fn.slider) return;
     if (!$.fn.chosen) return;
-    if (!$.fn.datepicker) return;
+    // flatpickr does not require a jQuery plugin
 
     // BOOTSTRAP SLIDER CTRL
     // -----------------------------------
@@ -29,22 +29,10 @@ function initSearch() {
 
     $('.chosen-select').chosen();
 
-    // DATETIMEPICKER
+    // DATEPICKER
     // -----------------------------------
-
-    $('#datetimepicker').datepicker({
-        orientation: 'bottom',
-        icons: {
-            time: 'fa fa-clock-o',
-            date: 'fa fa-calendar',
-            up: 'fa fa-chevron-up',
-            down: 'fa fa-chevron-down',
-            previous: 'fa fa-chevron-left',
-            next: 'fa fa-chevron-right',
-            today: 'fa fa-crosshairs',
-            clear: 'fa fa-trash'
-        }
-    });
+    const dp = document.getElementById('datetimepicker');
+    if (dp) flatpickr(dp, { dateFormat: 'Y-m-d' });
 
 }
 

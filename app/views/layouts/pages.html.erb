@@ -30,7 +30,7 @@
   </div>
 
   <!-- =============== APP SCRIPTS ===============-->
-  <%= javascript_packs_with_chunks_tag 'application', params[:controller] if pack_exists?(params[:controller]) %>
+  <%= javascript_pack_tag 'application' if pack_exists?(params[:controller]) %>
   <%= yield :vendor_js_area %>
 
   <%= yield :body_area %>

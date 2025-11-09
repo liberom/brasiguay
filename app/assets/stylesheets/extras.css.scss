@@ -3,18 +3,4 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // --- Fullcalendar
-//= require @fullcalendar/core/main.css
-//= require @fullcalendar/daygrid/main.css
-//= require @fullcalendar/timegrid/main.css
-//= require @fullcalendar/list/main.css
-//= require @fullcalendar/bootstrap/main.css
-// --- Slider Ctrl
-//= require bootstrap-slider/dist/css/bootstrap-slider.min
-// --- Chosen
-//= require chosen-js/chosen
-// --- DatetimePicker
-//= require bootstrap-datepicker/dist/css/bootstrap-datepicker.css
-// --- Datatables
-//= require datatables.net-bs4/css/dataTables.bootstrap4
-//= require datatables.net-keytable-bs/css/keyTable.bootstrap
-//= require datatables.net-responsive-bs/css/responsive.bootstrap
+// FullCalendar styles are imported via JS packs now.

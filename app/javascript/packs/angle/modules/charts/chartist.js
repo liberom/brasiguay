@@ -3,7 +3,10 @@
 
 
 import 'matchmedia/index.js';
-import Chartist from 'chartist';
+// Use UMD build to get global Chartist with Bar/Line constructors
+import 'chartist/dist/index.css';
+import 'chartist/dist/index.umd.js';
+const Chartist = window.Chartist;
 
 function initChartists() {
 

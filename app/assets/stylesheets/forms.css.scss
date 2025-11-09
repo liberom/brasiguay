@@ -2,8 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// --- Tags Input
-//= require bootstrap-tagsinput/dist/bootstrap-tagsinput
 // --- Slider Ctrl
 //= require bootstrap-slider/dist/css/bootstrap-slider.min
 // --- Chosen
@@ -11,10 +9,8 @@
 // --- Dropzone
 //= require dropzone/dist/basic
 //= require dropzone/dist/dropzone
-// --- DatetimePicker
-//= require bootstrap-datepicker/dist/css/bootstrap-datepicker
-// --- ColorPicker
-//= require bootstrap-colorpicker/dist/css/bootstrap-colorpicker
+// DatetimePicker handled via Flatpickr pack; remove legacy CSS require
+// ColorPicker handled via Pickr pack; remove legacy CSS require
 // --- CropperCss
 //= require cropper/dist/cropper.css
 // --- Select2

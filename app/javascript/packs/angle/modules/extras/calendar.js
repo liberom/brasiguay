@@ -20,7 +20,7 @@ function initFullCalendar() {
         events: createDemoEvents(),
         plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin, bootstrapPlugin],
         themeSystem: 'bootstrap',
-        header: {
+        headerToolbar: {
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'

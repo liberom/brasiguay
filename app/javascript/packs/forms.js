@@ -9,7 +9,7 @@ import initImageCropper from './angle/modules/forms/imagecrop';
 import initSelect2 from './angle/modules/forms/select2';
 import initDropzone from './angle/modules/forms/upload';
 import initWizard from './angle/modules/forms/wizard';
-import initXEditable from './angle/modules/forms/xeditable';
+// import initXEditable from './angle/modules/forms/xeditable';
 import './angle/modules/forms/validation';
 
 $(function() {
@@ -19,5 +19,5 @@ $(function() {
     initSelect2();
     initDropzone();
     initWizard();
-    initXEditable();
+    // initXEditable(); // disabled to remove legacy x-editable and CSS warnings
 });

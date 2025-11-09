@@ -3,7 +3,7 @@
 
 import Storages from 'js-storage';
 import i18next from 'i18next';
-import i18nextXHRBackend from 'i18next-xhr-backend';
+import HttpBackend from 'i18next-http-backend';
 
 var pathPrefix = '/api/i18n'; // folder of json files
 var STORAGEKEY = 'jq-appLang';
@@ -11,7 +11,7 @@ var savedLanguage = Storages.localStorage.get(STORAGEKEY);
 
 function initTranslation() {
     i18next
-        .use(i18nextXHRBackend)
+        .use(HttpBackend)
         // .use(LanguageDetector)
         .init({
             fallbackLng: savedLanguage || 'en',

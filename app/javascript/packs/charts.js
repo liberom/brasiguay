@@ -17,7 +17,6 @@ import {
     initFlotLine,
     initFlotPie
 } from './angle/modules/charts/flot';
-import initMorris from './angle/modules/charts/morris';
 import initSparkline from './angle/modules/charts/sparkline';
 
 $(function() {
@@ -25,7 +24,6 @@ $(function() {
     initChartJS();
     initChartists();
     initEasyPieChart();
-    initMorris();
     initSparkline();
     // Flot charts
     initFlotSpline();

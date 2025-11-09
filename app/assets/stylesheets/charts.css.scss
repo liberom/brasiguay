@@ -2,5 +2,4 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-//= require morris.js.so/morris
-//= require chartist/dist/chartist.min
+// Removed morris.js and chartist CSS from Sprockets; loaded via JS packs instead

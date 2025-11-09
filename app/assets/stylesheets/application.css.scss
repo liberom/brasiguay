@@ -12,10 +12,12 @@
  *= require @fortawesome/fontawesome-free/css/fontawesome.css
  * ---- Simple Line Icons
  *= require simple-line-icons/css/simple-line-icons
- * ---- Animate.css
- *= require animate.css/animate.min
- * ---- Whirl (spinners)
- *= require whirl/dist/whirl
+* ---- Animate.css
+*= require animate.css/animate.min
+* ---- Whirl (spinners)
+*= require whirl/dist/whirl
+ * ---- Spinkit (moved from elements.css)
+ *= require spinkit/spinkit
  *
  * ------------------------------
  * --- Assets paths redefinition

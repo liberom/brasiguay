@@ -8,7 +8,7 @@ module ApplicationHelper
     end
 
     def asset_exists?(subdirectory, filename)
-        File.exists?(File.join(Rails.root, 'app', 'assets', subdirectory, filename))
+        File.exist?(File.join(Rails.root, 'app', 'assets', subdirectory, filename))
     end
 
     def image_exists?(image)
@@ -30,7 +30,7 @@ module ApplicationHelper
     end
 
     def pack_exists?(filename)
-        File.exists?(File.join(Rails.root, 'app', 'javascript', 'packs', "#{filename}.js"))
+        File.exist?(File.join(Rails.root, 'app', 'javascript', 'packs', "#{filename}.js"))
     end
 
     def businesses_list

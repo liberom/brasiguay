@@ -1,45 +1,37 @@
 // config/webpack/environment.js
-const { environment } = require('@rails/webpacker');
+const { generateWebpackConfig, merge } = require('shakapacker');
 const webpack = require('webpack');
 
-// Add an additional plugin of your choosing : ProvidePlugin
-environment.plugins.append(
-    'Provide',
-    new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery',
-        Popper: ['popper.js', 'default'],
-        'window.moment': 'moment',
-        moment: 'moment',
-        Raphael: 'raphael' // required by morris.js
-    })
-);
+const providePlugin = new webpack.ProvidePlugin({
+  $: 'jquery',
+  jQuery: 'jquery',
+  'window.jQuery': 'jquery',
+  Popper: ['popper.js', 'default'],
+  'window.moment': 'moment',
+  moment: 'moment'
+});
 
-// Enable the default config
-// environment.splitChunks()
-environment.splitChunks(config =>
-    Object.assign({}, config, {
-        optimization: {
-            splitChunks: {
-                cacheGroups: {
-                    commons: {
-                        test: /[\\/]node_modules[\\/]/,
-                        // name: VENDOR_CHUNK_NAME,
-                        chunks: 'all',
-                        minChunks: 2
-                    }
-                }
-            }
+const customConfig = {
+  plugins: [providePlugin],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'all',
+          minChunks: 2
         }
-    })
-);
-
-// Fix for flot resize
-const flotResizeLoader = {
-    test: /jquery\.flot\.resize\.js$/,
-    use: ['imports-loader?this=>window']
+      }
+    }
+  },
+  module: {
+    rules: [
+      {
+        test: /jquery\.flot\.resize\.js$/,
+        use: [{ loader: 'imports-loader', options: { wrapper: 'window' } }]
+      }
+    ]
+  }
 };
-environment.loaders.prepend('flotresize', flotResizeLoader);
 
-module.exports = environment;
+module.exports = generateWebpackConfig(customConfig);
