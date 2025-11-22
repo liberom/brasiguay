@@ -1,0 +1,114 @@
+<div class="container-fluid">
+  <div class="row h-100">
+    <!-- Chat Header -->
+    <div class="col-md-12 mb-3">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <div>
+            <h5 class="card-title mb-0">Chat with <%= @other_user.email %></h5>
+            <small class="text-muted">Online</small>
+          </div>
+          <%= link_to 'Back to Contacts', chat_contacts_path, class: 'btn btn-sm btn-secondary' %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Messages Container -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body" style="height: 400px; overflow-y: auto;" id="messages-container">
+          <% if @messages.empty? %>
+            <div class="alert alert-info text-center">
+              No messages yet. Start the conversation!
+            </div>
+          <% else %>
+            <% @messages.each do |message| %>
+              <div class="mb-3 <%= 'text-right' if message.sender_id == current_user.id %>">
+                <div class="<%= message.sender_id == current_user.id ? 'badge badge-primary' : 'badge badge-secondary' %> p-2" style="max-width: 70%; word-wrap: break-word;">
+                  <strong><%= message.sender.email %></strong><br>
+                  <%= simple_format(message.content) %>
+                  <br>
+                  <small><%= message.created_at.strftime('%H:%M') %></small>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+
+        <!-- Message Input -->
+        <div class="card-footer">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="message-input"
+              placeholder="Type a message..."
+              data-receiver-id="<%= @other_user.id %>"
+            >
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="button" id="send-button">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const messageInput = document.getElementById('message-input');
+    const sendButton = document.getElementById('send-button');
+    const messagesContainer = document.getElementById('messages-container');
+    const receiverId = messageInput.dataset.receiverId;
+
+    // Subscribe to chat channel
+    App.cable.subscriptions.create({ channel: 'ChatChannel' }, {
+      received: function(data) {
+        if (data.type === 'message' && data.sender_id == receiverId) {
+          addMessageToUI(data.sender_name, data.message, data.timestamp, false);
+        } else if (data.type === 'message_sent' && data.receiver_id == receiverId) {
+          addMessageToUI('You', data.message, data.timestamp, true);
+          messageInput.value = '';
+        }
+      }
+    });
+
+    // Send message
+    function sendMessage() {
+      const message = messageInput.value.trim();
+      if (message) {
+        App.cable.subscriptions.subscriptions[0].send({
+          action: 'send_message',
+          message: message,
+          receiver_id: receiverId
+        });
+      }
+    }
+
+    // Add message to UI
+    function addMessageToUI(sender, message, timestamp, isSender) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'mb-3 ' + (isSender ? 'text-right' : '');
+      messageDiv.innerHTML = `
+        <div class="badge ${isSender ? 'badge-primary' : 'badge-secondary'} p-2" style="max-width: 70%; word-wrap: break-word;">
+          <strong>${sender}</strong><br>
+          ${message}<br>
+          <small>${timestamp}</small>
+        </div>
+      `;
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    sendButton.addEventListener('click', sendMessage);
+    messageInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+
+    // Scroll to bottom
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  });
+</script>

@@ -12,7 +12,10 @@
     "webpack-dev-server": "bin/webpack-dev-server",
     "build": "bin/webpack",
     "build:dev": "bin/webpack-dev-server",
-    "start": "bin/rails server"
+    "start": "bin/rails server",
+    "dev": "foreman start -f Procfile.dev",
+    "dev:webpack": "bin/webpack-dev-server",
+    "dev:rails": "bin/rails server"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "7.1.0",

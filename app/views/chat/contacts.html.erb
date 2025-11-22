@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Chat Contacts</h5>
+          <p class="card-text text-muted">Select a contact to start chatting</p>
+        </div>
+        <div class="card-body">
+          <% if @contacts.empty? %>
+            <div class="alert alert-info">
+              No conversations yet. Visit a user's profile or search for users to start chatting.
+            </div>
+          <% else %>
+            <div class="list-group">
+              <% @contacts.each do |contact| %>
+                <%= link_to chat_room_path(contact), class: 'list-group-item list-group-item-action' do %>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <h6 class="mb-0"><%= contact.email %></h6>
+                      <small class="text-muted"><%= contact.profile&.first_name || 'No name' %></small>
+                    </div>
+                    <% unread_count = Message.where(receiver_id: current_user.id, sender_id: contact.id, read_at: nil).count %>
+                    <% if unread_count > 0 %>
+                      <span class="badge badge-primary"><%= unread_count %></span>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

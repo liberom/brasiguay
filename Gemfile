@@ -50,6 +50,8 @@ end
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
+  # Process manager for unified development (webpack + rails server)
+  gem 'foreman', '~> 0.87.2'
 end
 
 group :test do

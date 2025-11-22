@@ -12,10 +12,11 @@ Rails.application.routes.draw do
   resources :articles
   resources :accounts
   resources :profiles
+  resources :images, only: [:index, :show, :create, :destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  # defaults to dashboard
-  root :to => redirect('/dashboard/dashboard_v1')
+  # Root path - redirect to login page for unauthenticated users
+  root 'pages#login'
 
   devise_for :users, path_prefix: 'auth', controllers: { registrations: 'users/registrations', sessions:'users/sessions' }
 
@@ -108,11 +109,22 @@ Rails.application.routes.draw do
   get 'pages/maintenance'
   get 'pages/error500'
 
+  # Chat routes
+  get 'chat/contacts', to: 'chat#contacts'
+  get 'chat/room/:user_id', to: 'chat#room', as: 'chat_room'
+  get 'api/online-users', to: 'chat#online_users'
+
+  # Image upload API
+  post 'api/images/upload', to: 'images#api_upload'
+
   # api routes
   get '/api/datatable' => 'api#datatable'
   get '/api/i18n/:locale' => 'api#i18n'
   post '/api/xeditable' => 'api#xeditable'
   get '/api/xeditable-groups' => 'api#xeditablegroups'
+
+  # WebSocket mount point for ActionCable
+  mount ActionCable.server => '/cable'
 
   # the rest goes to root
   get '*path' => redirect('/')
